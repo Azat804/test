@@ -1,0 +1,341 @@
+@import "./reset.css";
+@import "./fonts.css";
+
+body {
+  font-family: "YS Text";
+}
+.main {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.main-inner {
+  padding-top: 28px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 65px 0px;
+}
+
+.main-inner__shop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 0;
+}
+
+.main-inner__shop-header {
+  min-width: 211px;
+  min-height: 11.95px;
+  background-color: #e67e22;
+  border-radius: 150% 100% 0% 0%;
+}
+
+.main-inner__shop-header-decoration {
+  list-style: none;
+  display: flex;
+  gap: 0px;
+  position: absolute;
+  top: 11.95px;
+  left: calc(100% - 11.95px) / 2;
+  z-index: 1;
+}
+
+.main-inner__shop-decoration-item {
+  min-width: 26.42px;
+  min-height: 30px;
+  border-radius: 0% 0% 50% 50%;
+}
+
+.main-inner__shop-decoration-item:nth-child(even) {
+  background-color: #c0392b;
+}
+
+.main-inner__shop-decoration-item:nth-child(odd) {
+  background-color: #f1c40f;
+}
+
+.main-inner__shop-wall {
+  min-height: 288.56px;
+  max-width: 198.56px;
+  background-color: #34495e;
+  display: flex;
+  flex-direction: column;
+  gap: 74px 0px;
+}
+
+.main-inner__shop-wall-decoration-shadow {
+  list-style: none;
+  display: flex;
+  gap: 0px;
+  position: absolute;
+  top: 26.905px;
+  left: calc(100% - 11.95px) / 2;
+  z-index: 0;
+}
+
+.main-inner__shop-decoration-shadow-item {
+  min-width: 24.82px;
+  min-height: 30px;
+  border-radius: 0% 0% 50% 50%;
+  background-color: #1d2a36;
+}
+
+.main-inner__shop-shelf-top {
+  display: flex;
+  flex-direction: column;
+  margin-top: 104px;
+
+  /*gap:0;
+    position: absolute;
+    top: 85.95px;
+    left: 33px;*/
+}
+
+.main-inner__shop-shelf-middle {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-shelf-top__floor,
+.shop-shelf-middle__floor {
+  position: relative;
+  left: -7px;
+  min-width: 200px;
+  height: 0;
+  border-bottom: 10.15px solid #f39c12;
+  border-left: 7.075px solid transparent;
+  border-right: 7.075px solid transparent;
+}
+
+.shop-shelf-top__wall,
+.shop-shelf-middle__wall {
+  min-height: 7.85px;
+  min-width: 212.37px;
+  position: relative;
+  left: -7px;
+  background-color: #f1c40f;
+}
+
+.main-inner__shop-bottom-shelf-floor {
+  position: relative;
+  min-width: 200px;
+  height: 0;
+  border-bottom: 20px solid #e3e7e8;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
+.main-inner__shop-bottom-shelf-wall {
+  background-color: #bdc3c7;
+  min-height: 20px;
+  min-width: 211px;
+}
+
+.main-inner__shop-bottom-wall {
+  background-color: #e67e22;
+  min-height: 91px;
+  min-width: 201px;
+}
+
+.main-inner__shop-bottom-wall-shadow {
+  background-color: #d35400;
+  min-height: 20px;
+  min-width: 201px;
+}
+
+.shop-shelf-top__wine {
+  position: absolute;
+  top: -113px;
+  left: 22px;
+  z-index: 2;
+}
+
+.shop-shelf-top__milk {
+  position: absolute;
+  top: -79px;
+  left: 62px;
+  z-index: 2;
+}
+
+.shop-shelf-top__jam {
+  position: absolute;
+  top: -31px;
+  left: 103px;
+  z-index: 2;
+}
+
+.shop-shelf-top__cheese {
+  position: absolute;
+  top: -24px;
+  left: 156px;
+  z-index: 2;
+}
+
+.shop-shelf-middle__meat {
+  position: absolute;
+  top: -46px;
+  left: 1px;
+  z-index: 2;
+}
+
+.shop-shelf-middle__chicken {
+  position: absolute;
+  top: -44px;
+  left: 46px;
+  z-index: 2;
+}
+
+.shop-shelf-middle__chips {
+  position: absolute;
+  top: -33px;
+  left: 120px;
+  z-index: 2;
+}
+
+.shop-bottom-shelf__pineapple {
+  position: absolute;
+  top: -64px;
+  left: 8px;
+  z-index: 2;
+}
+
+.shop-bottom-shelf__banana {
+  position: absolute;
+  top: -35px;
+  left: 49px;
+  z-index: 2;
+}
+
+.shop-bottom-shelf__apple {
+  position: absolute;
+  top: -25px;
+  left: 104px;
+  z-index: 2;
+}
+
+.shop-bottom-shelf__broccoli {
+  position: absolute;
+  top: -34px;
+  left: 149px;
+  z-index: 2;
+}
+
+.shop__product:active {
+  cursor: grabbing;
+}
+
+.shop__product {
+  cursor: grab;
+}
+
+.main-inner__basket {
+  position: absolute;
+  top: 372px;
+  left: -31px;
+  z-index: 2;
+}
+
+.main-inner__basket-product-milk,
+.main-inner__basket-product-wine,
+.main-inner__basket-product-jam,
+.main-inner__basket-product-cheese,
+.main-inner__basket-product-meat,
+.main-inner__basket-product-chicken,
+.main-inner__basket-product-chips,
+.main-inner__basket-product-pineapple,
+.main-inner__basket-product-banana,
+.main-inner__basket-product-apple,
+.main-inner__basket-product-broccoli {
+  transform: scale(1.5);
+  position: absolute;
+  top: 69px;
+  z-index: -1;
+  animation: appear 2s ease-in;
+}
+
+.main-inner__basket-product-milk {
+  top: 69px;
+}
+
+.main-inner__basket-product-wine {
+  top: 29px;
+}
+
+.main-inner__basket-product-jam {
+  top: 127px;
+}
+
+.main-inner__basket-product-cheese {
+  top: 133px;
+}
+
+.main-inner__basket-product-meat {
+  top: 115px;
+}
+
+.main-inner__basket-product-chicken {
+  top: 119px;
+}
+
+.main-inner__basket-product-chips {
+  top: 119px;
+}
+.main-inner__basket-product-pineapple {
+  top: 84px;
+}
+
+.main-inner__basket-product-banana {
+  top: 117px;
+}
+
+.main-inner__basket-product-apple {
+  top: 131px;
+}
+
+.main-inner__basket-product-broccoli {
+  top: 113px;
+}
+
+.main-inner__button {
+  display: none;
+  background-color: #fce000;
+  color: #21201f;
+  padding: 19px 18px;
+  border-radius: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 3;
+  font-weight: 500;
+  animation: appear 2s ease-in, blinking 3s linear infinite;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blinking {
+  0% {
+    background-color: #fce000;
+  }
+
+  50% {
+    background-color: #1a1702;
+    color: #fce000;
+  }
+
+  100% {
+    background-color: #fce000;
+  }
+}
