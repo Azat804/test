@@ -32,7 +32,7 @@ const dragover = (event) => false;
 const moveElement = function (event, item, offsetX, offsetY) {
   //event.preventDefault();
   let touch = event.targetTouches[0];
-  item.style.position = "fixed";
+  //item.style.position = "fixed";
   item.style.left = (touch.clientX - offsetX) + "px";
   item.style.top = (touch.clientY - offsetY) + "px";
 };
@@ -42,7 +42,7 @@ const stopMoving = function (item) {
   item.removeEventListener("touchend", stopMoving);
 };
 const touchStart = function (event, item) {
-  item.style.position = "fixed";
+  //item.style.position = "fixed";
   let touch = event.targetTouches[0];
   let elemX = item.getBoundingClientRect().x;
   let elemY = item.getBoundingClientRect().y;
