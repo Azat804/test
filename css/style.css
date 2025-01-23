@@ -31,10 +31,10 @@ body {
 }
 
 .main-inner__shop-header {
-  min-width: 211px;
+  min-width: 212px;
   min-height: 11.95px;
   background-color: #e67e22;
-  border-radius: 150% 100% 0% 0%;
+  border-radius: 50% 50% 0% 0%;
 }
 
 .main-inner__shop-header-decoration {
@@ -92,10 +92,7 @@ body {
   flex-direction: column;
   margin-top: 104px;
 
-  /*gap:0;
-    position: absolute;
-    top: 85.95px;
-    left: 33px;*/
+  
 }
 
 .main-inner__shop-shelf-middle {

@@ -1,37 +1,41 @@
-const drop = function (event, basket) {
+import { selectors } from "./selectors.js";
+
+const drop = (event, basket) => {
   addToBasket(event, basket, null);
 };
 
 const addToBasket = (event, basket, itemId) => {
+  const basketProductPreffix = "main-inner__basket-product-";
+  const maxNumBasketProducts = 3;
+  const delta = 80;
+  let totalWidthProducts = 0;
   const productId = itemId ? itemId : event?.dataTransfer.getData("product");
   const product = document.querySelector(`#${productId}`);
-  console.log(productId);
   let countBasketProducts = basket.parentNode.children.length - 1;
-  if (countBasketProducts < 3) {
-    let delta = 80;
-    let totalWidthProducts = 0;
+  if (countBasketProducts < maxNumBasketProducts) {
+  
     for (let i = 1; i <= countBasketProducts; i++) {
       totalWidthProducts += basket.parentNode.children[i].clientWidth;
     }
-    let paddingProduct = totalWidthProducts + delta;
-    console.log(basket.parentNode.children);
-    let basketProduct = document.createElement("img");
+    const paddingProduct = totalWidthProducts + delta;
+    const basketProduct = document.createElement("img");
     basketProduct.src = product.src;
-    basketProduct.className = `main-inner__basket-product-${productId}`;
+    basketProduct.className = `${basketProductPreffix}${productId}`;
     basketProduct.style.left = `${paddingProduct}px`;
     basket.parentNode.append(basketProduct);
     product.parentNode.removeChild(product);
-    if (countBasketProducts + 1 == 3) {
-      let button = document.querySelector(".main-inner__button");
+    if (countBasketProducts + 1 == maxNumBasketProducts) {
+      let button = document.querySelector(selectors.button);
       button.style.display = "inline";
-      basket.removeEventListener("drop", drop, true);
-      basket.removeEventListener("dragover", dragover, true);
+      basket.removeEventListener("drop", drop);
+      basket.removeEventListener("dragover", dragOver);
     }
   }
 };
-const dragover = (event) => false;
 
-const moveElement = function (event, item, offsetX, offsetY) {
+const dragOver = () => false;
+
+const moveElement = (event, item, offsetX, offsetY) => {
   event.preventDefault();
   let touch = event.targetTouches[0];
   item.style.position = "fixed";
@@ -39,14 +43,13 @@ const moveElement = function (event, item, offsetX, offsetY) {
   item.style.top = touch.clientY - offsetY + "px";
 };
 
-const stopMoving = function (item, basket) {
-  let elemX = item.getBoundingClientRect().left;
-  let elemY = item.getBoundingClientRect().top;
-  let basketLeftX = basket.getBoundingClientRect().left;
-  let basketRightX = basket.getBoundingClientRect().right;
-  let basketTopY = basket.getBoundingClientRect().top;
-  let basketBottomY = basket.getBoundingClientRect().bottom;
-  //addToBasket(null, basket, item.id);
+const stopMoving = (item, basket) => {
+  const elemX = item.getBoundingClientRect().left;
+  const elemY = item.getBoundingClientRect().top;
+  const basketLeftX = basket.getBoundingClientRect().left;
+  const basketRightX = basket.getBoundingClientRect().right;
+  const basketTopY = basket.getBoundingClientRect().top;
+  const basketBottomY = basket.getBoundingClientRect().bottom;
   if (
     elemX > basketLeftX &&
     elemX < basketRightX &&
@@ -58,13 +61,10 @@ const stopMoving = function (item, basket) {
   item.removeEventListener("touchmove", moveElement);
   item.removeEventListener("touchend", stopMoving);
 };
-const touchStart = function (event, item, basket) {
+const touchStart = (event, item, basket) => {
   let touch = event.targetTouches[0];
   let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
-  //item.style.position = "fixed";
-  //item.style.left = elemX;
-  //item.style.top = elemY;
   let offsetX = touch.clientX - parseInt(elemX || 0, 10);
   let offsetY = touch.clientY - parseInt(elemY || 0, 10);
 
@@ -77,25 +77,25 @@ const touchStart = function (event, item, basket) {
 };
 
 const dragDrop = () => {
-  const basket = document.querySelector(".main-inner__basket-img");
-  const products = document.querySelectorAll(".shop__product");
+  const basket = document.querySelector(selectors.basket);
+  const products = document.querySelectorAll(selectors.shopProduct);
   products.forEach((item) => {
     item.ondragstart = function (event) {
       event.dataTransfer.setData("product", this.id);
     };
-    item.ontouchstart = function (event) {
+    item.ontouchstart = (event) => {
       touchStart(event, item, basket);
     };
   });
-  basket.ondragover = dragover;
+  basket.ondragover = dragOver;
 
-  basket.ondrop = function (event) {
+  basket.ondrop = (event) => {
     drop(event, basket);
   };
-  document.addEventListener("touchstart", function (event) {
+  document.addEventListener("touchstart", (event) => {
     event.preventDefault();
   });
-  document.addEventListener("touchmove", function (event) {
+  document.addEventListener("touchmove", (event) => {
     event.preventDefault();
   });
 };
