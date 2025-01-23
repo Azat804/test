@@ -33,8 +33,8 @@ const moveElement = function (event, item, offsetX, offsetY) {
   event.preventDefault();
   let touch = event.targetTouches[0];
   //item.style.position = "fixed";
-  item.style.left = (touch.clientX - offsetX) + "px";
-  item.style.top = (touch.clientY - offsetY) + "px";
+  item.style.left = touch.clientX - offsetX + "px";
+  item.style.top = touch.clientY - offsetY + "px";
 };
 
 const stopMoving = function (item) {
@@ -42,10 +42,12 @@ const stopMoving = function (item) {
   item.removeEventListener("touchend", stopMoving);
 };
 const touchStart = function (event, item) {
-  item.style.position = "fixed";
   let touch = event.targetTouches[0];
   let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
+  item.style.position = "fixed";
+  item.style.left = elemX;
+  item.style.top = elemY;
   let offsetX = touch.clientX - parseInt(elemX || 0, 10);
   let offsetY = touch.clientY - parseInt(elemY || 0, 10);
 
@@ -62,6 +64,10 @@ const dragDrop = () => {
   const products = document.querySelectorAll(".shop__product");
   products.forEach((item) => {
     item.ondragstart = function (event) {
+      console.log(
+        parseInt(item.getBoundingClientRect().left || 0, 10),
+        item.getBoundingClientRect().top
+      );
       event.dataTransfer.setData("product", this.id);
     };
     item.ontouchstart = function (event) {
