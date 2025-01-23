@@ -53,7 +53,7 @@ const touchStart = function (e, item) {
   });
   document.addEventListener("touchend", (event) => {
     // event.stopPropagation();
-    //stopMoving();
+    stopMoving();
   });
 };
 
@@ -72,7 +72,7 @@ const dragDrop = () => {
   });
   document.addEventListener("touchmove", function (event) {
     //event.stopPropagation();
-    // event.preventDefault();
+    event.preventDefault();
   });
   basket.ondragover = dragover;
 
