@@ -58,7 +58,7 @@ const stopMoving = function (item, basket) {
   item.removeEventListener("touchmove", moveElement);
   item.removeEventListener("touchend", stopMoving);
 };
-const touchStart = function (event, item) {
+const touchStart = function (event, item, basket) {
   let touch = event.targetTouches[0];
   let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
@@ -72,7 +72,7 @@ const touchStart = function (event, item) {
     moveElement(e, item, offsetX, offsetY);
   });
   item.addEventListener("touchend", () => {
-    stopMoving(item);
+    stopMoving(item, basket);
   });
 };
 
