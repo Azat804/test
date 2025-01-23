@@ -42,7 +42,7 @@ const stopMoving = function (item) {
   item.removeEventListener("touchend", stopMoving);
 };
 const touchStart = function (event, item) {
-  //item.style.position = "fixed";
+  item.style.position = "fixed";
   let touch = event.targetTouches[0];
   let elemX = item.getBoundingClientRect().x;
   let elemY = item.getBoundingClientRect().y;
