@@ -39,14 +39,14 @@ const moveElement = function (event, item, offsetX, offsetY) {
   item.style.top = touch.clientY - offsetY + "px";
 };
 
-const stopMoving = function (event, item, basket) {
+const stopMoving = function (item, basket) {
   let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
   let basketLeftX = basket.getBoundingClientRect().left;
   let basketRightX = basket.getBoundingClientRect().right;
   let basketTopY = basket.getBoundingClientRect().top;
   let basketBottomY = basket.getBoundingClientRect().bottom;
-  addToBasket(event, basket);
+  //addToBasket(event, basket);
   if (
     elemX > basketLeftX &&
     elemX < basketRightX &&
@@ -72,7 +72,7 @@ const touchStart = function (event, item, basket) {
     moveElement(e, item, offsetX, offsetY);
   });
   item.addEventListener("touchend", () => {
-    stopMoving(event, item, basket);
+    stopMoving(item, basket);
   });
 };
 
@@ -88,7 +88,7 @@ const dragDrop = () => {
       event.dataTransfer.setData("product", this.id);
     };
     item.ontouchstart = function (event) {
-      event.dataTransfer.setData("product", this.id);
+      //event.dataTransfer.setData("product", this.id);
       touchStart(event, item, basket);
     };
   });
