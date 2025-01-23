@@ -31,8 +31,8 @@ const dragover = (event) => false;
 
 const moveElement = function (event, item, offsetX, offsetY) {
   event.preventDefault();
-  var touch = event.targetTouches[0];
-
+  let touch = event.targetTouches[0];
+  itemmstyle.position = "fixed";
   item.style.left = touch.clientX - offsetX + "px";
   item.style.top = touch.clientY - offsetY + "px";
 };
