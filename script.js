@@ -16,7 +16,6 @@ const drop = function (event) {
     basketProduct.src = product.src;
     basketProduct.className = `main-inner__basket-product-${productId}`;
     basketProduct.style.left = `${paddingProduct}px`;
-    //basketProduct.id= '';
     basket.parentNode.append(basketProduct);
     product.parentNode.removeChild(product);
     if (countBasketProducts + 1 == 3) {
@@ -30,6 +29,28 @@ const drop = function (event) {
 
 const dragover = (event) => false;
 
+const moveElement = function (event, item, offsetX, offsetY) {
+  event.preventDefault();
+  var touch = event.targetTouches[0];
+  item.style.left = touch.clientX - offsetX + "px";
+  item.style.top = touch.clientY - offsetY + "px";
+};
+
+const stopMoving = function () {
+  document.removeEventListener("touchmove", moveElement);
+  document.removeEventListener("touchend", stopMoving);
+};
+const touchStart = function (e, item) {
+  let touch = e.targetTouches[0];
+  let offsetX = touch.clientX - parseInt(item.left || 0, 10);
+  let offsetY = touch.clientY - parseInt(item.top || 0, 10);
+
+  document.addEventListener("touchmove", (event) => {
+    moveElement(event, item, offsetX, offsetY);
+  });
+  document.addEventListener("touchend", stopMoving);
+};
+
 const dragDrop = () => {
   const basket = document.querySelector(".main-inner__basket-img");
   const products = document.querySelectorAll(".shop__product");
@@ -37,6 +58,12 @@ const dragDrop = () => {
     item.ondragstart = function (event) {
       event.dataTransfer.setData("product", this.id);
     };
+    item.ontouchstart = function (event) {
+      touchStart(event, item);
+    };
+  });
+  document.addEventListener("touchmove", function (event) {
+    event.preventDefault();
   });
   basket.ondragover = dragover;
 
