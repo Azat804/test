@@ -32,6 +32,7 @@ const dragover = (event) => false;
 const moveElement = function (event, item, offsetX, offsetY) {
   event.preventDefault();
   let touch = event.targetTouches[0];
+  item.style.position = "fixed";
   item.style.left = touch.clientX - offsetX + "px";
   item.style.top = touch.clientY - offsetY + "px";
 };
@@ -42,8 +43,10 @@ const stopMoving = function () {
 };
 const touchStart = function (event, item) {
   let touch = event.targetTouches[0];
-  let offsetX = touch.clientX - parseInt(item.style.left || 0, 10);
-  let offsetY = touch.clientY - parseInt(item.style.top || 0, 10);
+  let elemX = item.getBoundingClientRect().x;
+  let elemY = item.getBoundingClientRect().y;
+  let offsetX = touch.clientX - parseInt(elemX || 0, 10);
+  let offsetY = touch.clientY - parseInt(elemY || 0, 10);
 
   document.addEventListener("touchmove", (e) => {
     moveElement(e, item, offsetX, offsetY);
