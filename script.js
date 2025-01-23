@@ -39,8 +39,8 @@ const moveElement = function (event, item, offsetX, offsetY) {
   item.style.top = touch.clientY - offsetY + "px";
 };
 
-const stopMoving = function (item, basket) {
- /* let elemX = item.getBoundingClientRect().left;
+const stopMoving = function (item) {
+  /* let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
   let basketLeftX = basket.getBoundingClientRect().left;
   let basketRightX = basket.getBoundingClientRect().right;
@@ -58,7 +58,7 @@ const stopMoving = function (item, basket) {
   item.removeEventListener("touchmove", moveElement);
   item.removeEventListener("touchend", stopMoving);
 };
-const touchStart = function (event, item, basket) {
+const touchStart = function (event, item) {
   let touch = event.targetTouches[0];
   let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
@@ -72,7 +72,7 @@ const touchStart = function (event, item, basket) {
     moveElement(e, item, offsetX, offsetY);
   });
   item.addEventListener("touchend", () => {
-    stopMoving(item, basket);
+    stopMoving(item);
   });
 };
 
@@ -81,15 +81,10 @@ const dragDrop = () => {
   const products = document.querySelectorAll(".shop__product");
   products.forEach((item) => {
     item.ondragstart = function (event) {
-      console.log(
-        parseInt(item.getBoundingClientRect().left || 0, 10),
-        item.getBoundingClientRect().top
-      );
       event.dataTransfer.setData("product", this.id);
     };
     item.ontouchstart = function (event) {
-      //event.dataTransfer.setData("product", this.id);
-      touchStart(event, item, basket);
+      touchStart(event, item);
     };
   });
   basket.ondragover = dragover;
