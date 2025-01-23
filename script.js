@@ -1,5 +1,8 @@
-const drop = function (event) {
-  const basket = document.querySelector(".main-inner__basket-img");
+const drop = function (event, basket) {
+  addToBasket(event, basket);
+};
+
+const addToBasket = (event, basket) => {
   const productId = event.dataTransfer.getData("product");
   const product = document.querySelector(`#${productId}`);
   console.log(productId);
@@ -26,7 +29,6 @@ const drop = function (event) {
     }
   }
 };
-
 const dragover = (event) => false;
 
 const moveElement = function (event, item, offsetX, offsetY) {
@@ -37,11 +39,25 @@ const moveElement = function (event, item, offsetX, offsetY) {
   item.style.top = touch.clientY - offsetY + "px";
 };
 
-const stopMoving = function (item) {
+const stopMoving = function (event, item, basket) {
+  let elemX = item.getBoundingClientRect().left;
+  let elemY = item.getBoundingClientRect().top;
+  let basketLeftX = basket.getBoundingClientRect().left;
+  let basketRightX = basket.getBoundingClientRect().right;
+  let basketTopY = basket.getBoundingClientRect().top;
+  let basketBottomY = basket.getBoundingClientRect().bottom;
+  if (
+    elemX > basketLeftX &&
+    elemX < basketRightX &&
+    elemY > basketTopY &&
+    elemY < basketBottomY
+  ) {
+    addToBasket(event, basket);
+  }
   item.removeEventListener("touchmove", moveElement);
   item.removeEventListener("touchend", stopMoving);
 };
-const touchStart = function (event, item) {
+const touchStart = function (event, item, basket) {
   let touch = event.targetTouches[0];
   let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
@@ -54,8 +70,8 @@ const touchStart = function (event, item) {
   item.addEventListener("touchmove", (e) => {
     moveElement(e, item, offsetX, offsetY);
   });
-  item.addEventListener("touchend", () => {
-    stopMoving(item);
+  item.addEventListener("touchend", (e) => {
+    stopMoving(e, item, basket);
   });
 };
 
@@ -71,12 +87,15 @@ const dragDrop = () => {
       event.dataTransfer.setData("product", this.id);
     };
     item.ontouchstart = function (event) {
-      touchStart(event, item);
+      event.dataTransfer.setData("product", this.id);
+      touchStart(event, item, basket);
     };
   });
   basket.ondragover = dragover;
 
-  basket.ondrop = drop;
+  basket.ondrop = function (event) {
+    drop(event, basket);
+  };
   document.addEventListener("touchstart", function (event) {
     event.preventDefault();
   });
