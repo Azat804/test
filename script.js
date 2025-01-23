@@ -70,8 +70,8 @@ const touchStart = function (event, item, basket) {
   item.addEventListener("touchmove", (e) => {
     moveElement(e, item, offsetX, offsetY);
   });
-  item.addEventListener("touchend", (e) => {
-    stopMoving(e, item, basket);
+  item.addEventListener("touchend", () => {
+    stopMoving(event, item, basket);
   });
 };
 
