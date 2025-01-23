@@ -2,8 +2,8 @@ const drop = function (event, basket) {
   addToBasket(event, basket);
 };
 
-const addToBasket = (event, basket) => {
-  const productId = event.dataTransfer.getData("product");
+const addToBasket = (event, basket, itemId) => {
+  const productId = itemId ? itemId : event?.dataTransfer.getData("product");
   const product = document.querySelector(`#${productId}`);
   console.log(productId);
   let countBasketProducts = basket.parentNode.children.length - 1;
@@ -40,13 +40,13 @@ const moveElement = function (event, item, offsetX, offsetY) {
 };
 
 const stopMoving = function (item) {
-  /* let elemX = item.getBoundingClientRect().left;
+  let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
   let basketLeftX = basket.getBoundingClientRect().left;
   let basketRightX = basket.getBoundingClientRect().right;
   let basketTopY = basket.getBoundingClientRect().top;
   let basketBottomY = basket.getBoundingClientRect().bottom;
-  //addToBasket(event, basket);
+  addToBasket((basket = basket), (itemId = item.id));
   if (
     elemX > basketLeftX &&
     elemX < basketRightX &&
@@ -54,7 +54,7 @@ const stopMoving = function (item) {
     elemY < basketBottomY
   ) {
     //addToBasket(event, basket);
-  }*/
+  }
   item.removeEventListener("touchmove", moveElement);
   item.removeEventListener("touchend", stopMoving);
 };
