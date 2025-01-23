@@ -47,6 +47,7 @@ const touchStart = function (e, item) {
 
   document.addEventListener("touchmove", (event) => {
     event.stopPropagation();
+    event.preventDefault();
     moveElement(event, item, offsetX, offsetY);
   });
   document.addEventListener("touchend", (event) => {
@@ -69,6 +70,7 @@ const dragDrop = () => {
     };
   });
   document.addEventListener("touchmove", function (event) {
+    event.stopPropagation();
     event.preventDefault();
   });
   basket.ondragover = dragover;
