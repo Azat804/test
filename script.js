@@ -30,7 +30,7 @@ const drop = function (event) {
 const dragover = (event) => false;
 
 const moveElement = function (event, item, offsetX, offsetY) {
-  event.preventDefault();
+  //event.preventDefault();
   let touch = event.targetTouches[0];
   item.style.position = "fixed";
   item.style.left = (touch.clientX - offsetX) + "px";
@@ -71,10 +71,9 @@ const dragDrop = () => {
   basket.ondragover = dragover;
 
   basket.ondrop = drop;
-
-  document.addEventListener("touchmove", function (event) {
-    event.preventDefault();
-  });
 };
 
 document.addEventListener("DOMContentLoaded", dragDrop);
+document.addEventListener("touchmove", function (event) {
+  event.preventDefault();
+});
