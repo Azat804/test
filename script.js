@@ -46,8 +46,8 @@ const touchStart = function (event, item) {
   let touch = event.targetTouches[0];
   let elemX = item.getBoundingClientRect().x;
   let elemY = item.getBoundingClientRect().y;
-  let offsetX = touch.clientX - parseInt(elemX, 10);
-  let offsetY = touch.clientY - parseInt(elemY, 10);
+  let offsetX = touch.clientX - parseInt(elemX || 0, 10);
+  let offsetY = touch.clientY - parseInt(elemY || 0, 10);
 
   item.addEventListener("touchmove", (e) => {
     moveElement(e, item, offsetX, offsetY);
