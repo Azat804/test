@@ -232,7 +232,6 @@ body {
 
 .shop__product {
   cursor: grab;
-  touch-action: none;
 }
 
 .main-inner__basket {
