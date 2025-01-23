@@ -71,9 +71,9 @@ const dragDrop = () => {
   basket.ondragover = dragover;
 
   basket.ondrop = drop;
+  document.addEventListener("touchstart", function (event) {
+    event.preventDefault();
+  });
 };
 
 document.addEventListener("DOMContentLoaded", dragDrop);
-document.addEventListener("touchmove", function (event) {
-  event.preventDefault();
-});
