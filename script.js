@@ -1,5 +1,5 @@
 const drop = function (event, basket) {
-  addToBasket(event, basket);
+  addToBasket({ event, basket });
 };
 
 const addToBasket = (event, basket, itemId) => {
@@ -39,7 +39,7 @@ const moveElement = function (event, item, offsetX, offsetY) {
   item.style.top = touch.clientY - offsetY + "px";
 };
 
-const stopMoving = function (item) {
+const stopMoving = function (item, basket) {
   let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
   let basketLeftX = basket.getBoundingClientRect().left;
@@ -84,7 +84,7 @@ const dragDrop = () => {
       event.dataTransfer.setData("product", this.id);
     };
     item.ontouchstart = function (event) {
-      touchStart(event, item);
+      touchStart(event, item, basket);
     };
   });
   basket.ondragover = dragover;
