@@ -40,7 +40,7 @@ const moveElement = function (event, item, offsetX, offsetY) {
 };
 
 const stopMoving = function (item, basket) {
-  let elemX = item.getBoundingClientRect().left;
+ /* let elemX = item.getBoundingClientRect().left;
   let elemY = item.getBoundingClientRect().top;
   let basketLeftX = basket.getBoundingClientRect().left;
   let basketRightX = basket.getBoundingClientRect().right;
@@ -54,7 +54,7 @@ const stopMoving = function (item, basket) {
     elemY < basketBottomY
   ) {
     //addToBasket(event, basket);
-  }
+  }*/
   item.removeEventListener("touchmove", moveElement);
   item.removeEventListener("touchend", stopMoving);
 };
