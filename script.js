@@ -1,5 +1,5 @@
 const drop = function (event, basket) {
-  addToBasket({ event, basket });
+  addToBasket(event, basket, null);
 };
 
 const addToBasket = (event, basket, itemId) => {
@@ -46,7 +46,7 @@ const stopMoving = function (item, basket) {
   let basketRightX = basket.getBoundingClientRect().right;
   let basketTopY = basket.getBoundingClientRect().top;
   let basketBottomY = basket.getBoundingClientRect().bottom;
-  addToBasket({ basket, itemId: item.id });
+  addToBasket(null, basket, item.id);
   if (
     elemX > basketLeftX &&
     elemX < basketRightX &&
