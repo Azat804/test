@@ -46,7 +46,7 @@ const stopMoving = function (item) {
   let basketRightX = basket.getBoundingClientRect().right;
   let basketTopY = basket.getBoundingClientRect().top;
   let basketBottomY = basket.getBoundingClientRect().bottom;
-  addToBasket((basket = basket), (itemId = item.id));
+  addToBasket({ basket, itemId: item.id });
   if (
     elemX > basketLeftX &&
     elemX < basketRightX &&
