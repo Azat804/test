@@ -46,14 +46,14 @@ const stopMoving = function (item, basket) {
   let basketRightX = basket.getBoundingClientRect().right;
   let basketTopY = basket.getBoundingClientRect().top;
   let basketBottomY = basket.getBoundingClientRect().bottom;
-  addToBasket(null, basket, item.id);
+  //addToBasket(null, basket, item.id);
   if (
     elemX > basketLeftX &&
     elemX < basketRightX &&
     elemY > basketTopY &&
     elemY < basketBottomY
   ) {
-    //addToBasket(event, basket);
+    addToBasket(null, basket, item.id);
   }
   item.removeEventListener("touchmove", moveElement);
   item.removeEventListener("touchend", stopMoving);
