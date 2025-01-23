@@ -46,12 +46,9 @@ const touchStart = function (e, item) {
   let offsetY = touch.clientY - parseInt(item.top || 0, 10);
 
   document.addEventListener("touchmove", (event) => {
-    event.stopPropagation();
     moveElement(event, item, offsetX, offsetY);
   });
-  document.addEventListener("touchend", (event) => {
-    stopMoving();
-  });
+  document.addEventListener("touchend", stopMoving);
 };
 
 const dragDrop = () => {
@@ -62,14 +59,10 @@ const dragDrop = () => {
       event.dataTransfer.setData("product", this.id);
     };
     item.ontouchstart = function (event) {
-      event.stopPropagation();
-      event.dataTransfer.setData("productTouch", this.id);
       touchStart(event, item);
     };
   });
-  document.addEventListener("touchmove", function (event) {
-    event.preventDefault();
-  });
+
   basket.ondragover = dragover;
 
   basket.ondrop = drop;
