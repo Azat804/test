@@ -30,7 +30,7 @@ const drop = function (event) {
 const dragover = (event) => false;
 
 const moveElement = function (event, item, offsetX, offsetY) {
-  event.preventDefault();
+  //event.preventDefault();
   let touch = event.targetTouches[0];
   itemmstyle.position = "fixed";
   item.style.left = touch.clientX - offsetX + "px";
@@ -47,13 +47,13 @@ const touchStart = function (e, item) {
   let offsetY = touch.clientY - parseInt(item.top || 0, 10);
 
   document.addEventListener("touchmove", (event) => {
-    event.stopPropagation();
-    event.preventDefault();
+    // event.stopPropagation();
+    //event.preventDefault();
     moveElement(event, item, offsetX, offsetY);
   });
   document.addEventListener("touchend", (event) => {
-    event.stopPropagation();
-    stopMoving();
+    // event.stopPropagation();
+    //stopMoving();
   });
 };
 
@@ -65,14 +65,14 @@ const dragDrop = () => {
       event.dataTransfer.setData("product", this.id);
     };
     item.ontouchstart = function (event) {
-      event.stopPropagation();
+      //event.stopPropagation();
       event.dataTransfer.setData("productTouch", this.id);
       touchStart(event, item);
     };
   });
   document.addEventListener("touchmove", function (event) {
-    event.stopPropagation();
-    event.preventDefault();
+    //event.stopPropagation();
+    // event.preventDefault();
   });
   basket.ondragover = dragover;
 
