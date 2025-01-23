@@ -43,8 +43,8 @@ const stopMoving = function () {
 };
 const touchStart = function (e, item) {
   let touch = e.targetTouches[0];
-  let offsetX = touch.clientX - parseInt(item.left || 0, 10);
-  let offsetY = touch.clientY - parseInt(item.top || 0, 10);
+  let offsetX = touch.clientX - parseInt(item.style.left || 0, 10);
+  let offsetY = touch.clientY - parseInt(item.style.top || 0, 10);
 
   document.addEventListener("touchmove", (event) => {
     // event.stopPropagation();
