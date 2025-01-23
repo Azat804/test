@@ -37,9 +37,9 @@ const moveElement = function (event, item, offsetX, offsetY) {
   item.style.top = (touch.clientY -offsetY) + "px";
 };
 
-const stopMoving = function () {
-  document.removeEventListener("touchmove", moveElement);
-  document.removeEventListener("touchend", stopMoving);
+const stopMoving = function (item) {
+  item.removeEventListener("touchmove", moveElement);
+  item.removeEventListener("touchend", stopMoving);
 };
 const touchStart = function (event, item) {
   item.style.position = "fixed";
@@ -49,10 +49,10 @@ const touchStart = function (event, item) {
   let offsetX = touch.clientX - parseInt(elemX || 0, 10);
   let offsetY = touch.clientY - parseInt(elemY || 0, 10);
 
-  document.addEventListener("touchmove", (e) => {
+  item.addEventListener("touchmove", (e) => {
     moveElement(e, item, offsetX, offsetY);
   });
-  document.addEventListener("touchend", stopMoving);
+  item.addEventListener("touchend", ()=> {stopMoving(item);});
 };
 
 const dragDrop = () => {
