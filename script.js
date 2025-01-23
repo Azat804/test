@@ -43,7 +43,6 @@ const stopMoving = function () {
 };
 const touchStart = function (e, item) {
   let touch = e.targetTouches[0];
-  item.style.position = "fixed";
   let offsetX = touch.clientX - parseInt(item.left || 0, 10);
   let offsetY = touch.clientY - parseInt(item.top || 0, 10);
 
