@@ -229,7 +229,7 @@ body {
 .shop__product {
   cursor: grab;
   opacity: 1;
-  transition: 1s;
+  transition: opacity 1s;
 }
 
 .main-inner__basket {

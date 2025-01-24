@@ -29,8 +29,8 @@ const addToBasket = ({ basket, event = null, itemId = "" }) => {
     if (countBasketProducts + 1 == maxNumBasketProducts) {
       let button = document.querySelector(selectors.button);
       button.style.display = "inline";
-      basket.removeEventListener("drop", drop);
-      basket.removeEventListener("dragover", dragOver);
+      basket.ondrop = "";
+      basket.ondragover = "";
     }
   }
 };
