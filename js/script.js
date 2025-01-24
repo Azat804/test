@@ -29,8 +29,8 @@ const addToBasket = ({ basket, event = null, itemId = "" }) => {
     if (countBasketProducts + 1 == maxNumBasketProducts) {
       let button = document.querySelector(selectors.button);
       button.style.display = "inline";
-      basket.ondrop = "";
-      basket.ondragover = "";
+      basket.removeEventListener("drop", drop);
+      basket.removeEventListener("dragover", dragOver);
     }
   }
 };
@@ -94,6 +94,9 @@ const dragDrop = () => {
   basket.ondrop = (event) => {
     drop(event, basket);
   };
+  document.addEventListener("touchstart", (event) => {
+    event.preventDefault();
+  });
   document.addEventListener("touchmove", (event) => {
     event.preventDefault();
   });
