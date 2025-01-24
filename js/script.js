@@ -1,10 +1,10 @@
 import { selectors } from "./selectors.js";
 
 const drop = (event, basket) => {
-  addToBasket(event, basket, null);
+  addToBasket({ basket, event });
 };
 
-const addToBasket = (event, basket, itemId) => {
+const addToBasket = ({ basket, event = null, itemId = "" }) => {
   const basketProductPreffix = "main-inner__basket-product-";
   const maxNumBasketProducts = 3;
   const delta = 80;
@@ -13,7 +13,6 @@ const addToBasket = (event, basket, itemId) => {
   const product = document.querySelector(`#${productId}`);
   let countBasketProducts = basket.parentNode.children.length - 1;
   if (countBasketProducts < maxNumBasketProducts) {
-  
     for (let i = 1; i <= countBasketProducts; i++) {
       totalWidthProducts += basket.parentNode.children[i].clientWidth;
     }
@@ -23,12 +22,15 @@ const addToBasket = (event, basket, itemId) => {
     basketProduct.className = `${basketProductPreffix}${productId}`;
     basketProduct.style.left = `${paddingProduct}px`;
     basket.parentNode.append(basketProduct);
-    product.parentNode.removeChild(product);
+    product.style.opacity = 0;
+    setTimeout(() => {
+      product.parentNode.removeChild(product);
+    }, 1000);
     if (countBasketProducts + 1 == maxNumBasketProducts) {
       let button = document.querySelector(selectors.button);
       button.style.display = "inline";
-      basket.removeEventListener("drop", drop);
-      basket.removeEventListener("dragover", dragOver);
+      basket.ondrop = "";
+      basket.ondragover = "";
     }
   }
 };
@@ -56,7 +58,7 @@ const stopMoving = (item, basket) => {
     elemY > basketTopY &&
     elemY < basketBottomY
   ) {
-    addToBasket(null, basket, item.id);
+    addToBasket({ basket, itemId: item.id });
   }
   item.removeEventListener("touchmove", moveElement);
   item.removeEventListener("touchend", stopMoving);
@@ -92,9 +94,6 @@ const dragDrop = () => {
   basket.ondrop = (event) => {
     drop(event, basket);
   };
-  document.addEventListener("touchstart", (event) => {
-    event.preventDefault();
-  });
   document.addEventListener("touchmove", (event) => {
     event.preventDefault();
   });

@@ -3,7 +3,7 @@
 
 body {
   font-family: "YS Text";
-  overflow: hidden;
+  /* overflow: hidden;*/
 }
 .main {
   min-height: 100vh;
@@ -31,7 +31,7 @@ body {
 }
 
 .main-inner__shop-header {
-  min-width: 212px;
+  min-width: 211px;
   min-height: 11.95px;
   background-color: #e67e22;
   border-radius: 50% 50% 0% 0%;
@@ -91,8 +91,6 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 104px;
-
-  
 }
 
 .main-inner__shop-shelf-middle {
@@ -230,6 +228,8 @@ body {
 
 .shop__product {
   cursor: grab;
+  opacity: 1;
+  transition: 1s;
 }
 
 .main-inner__basket {
@@ -254,7 +254,7 @@ body {
   position: absolute;
   top: 69px;
   z-index: -1;
-  animation: appear 2s ease-in;
+  animation: appear 1s ease-in;
 }
 
 .main-inner__basket-product-milk {
@@ -310,7 +310,7 @@ body {
   cursor: pointer;
   z-index: 3;
   font-weight: 500;
-  animation: appear 2s ease-in, blinking 3s linear infinite;
+  animation: appear 1s ease-in, blinking 3s linear infinite;
 }
 
 @keyframes appear {
