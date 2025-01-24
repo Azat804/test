@@ -3,7 +3,7 @@
 
 body {
   font-family: "YS Text";
-  /* overflow: hidden;*/
+  overflow: hidden;
 }
 .main {
   min-height: 100vh;
